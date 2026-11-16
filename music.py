@@ -121,8 +121,8 @@ def cmd_sounds(song, names):
     # A bare melody can read in a different key than the song it belongs to; the bass decides. So every
     # melody sound also gets a _with_bass.wav: the same loop over the context bass.
     ctx = {p['name']: p for p in load_dir('presets')}[CONTEXT_BASS]
-    bass_loop = render_sound(ctx, song)[0] * 10 ** (CONTEXT_BASS_DB / 20)
-    for pre in pick(load_dir('presets'), names):
+    bass_loop = render_sound(ctx, song)[0] * 10 ** (CONTEXT_BASS_DB / 20) if 'bass' in song['tracks'] else 0   # a melody-only MIDI (transcribe --no-split) has no bass
+    for pre in [p for p in pick(load_dir('presets'), names) if p.get('track', 'melody') in song['tracks']]:
         t = time.time()
         loop, full = render_sound(pre, song)
         write(os.path.join(OUT, 'sounds', f'{pre["name"]}_loop.wav'), loop)

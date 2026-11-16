@@ -7,4 +7,4 @@ pedalboard
 pyloudnorm
 numba
 librosa        # transcribe.py, make_melodies.py, `music check`
-# transcription only (transcribe.py stems): demucs, torch, torchaudio (CPU wheels are enough)
+# transcription: see requirements-transcribe.txt
