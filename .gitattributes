@@ -1,0 +1,4 @@
+* text=auto
+music text eol=lf
+*.cmd text eol=crlf
+*.mid binary
