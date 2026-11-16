@@ -121,8 +121,8 @@ def cmd_sounds(song, names):
     # A bare melody can read in a different key than the song it belongs to; the bass decides. So every
     # melody sound also gets a _with_bass.wav: the same loop over the context bass.
     ctx = {p['name']: p for p in load_dir('presets')}[CONTEXT_BASS]
-    bass_loop = render_sound(ctx, song)[0] * 10 ** (CONTEXT_BASS_DB / 20)
-    for pre in pick(load_dir('presets'), names):
+    bass_loop = render_sound(ctx, song)[0] * 10 ** (CONTEXT_BASS_DB / 20) if 'bass' in song['tracks'] else 0   # a melody-only MIDI (transcribe --no-split) has no bass
+    for pre in [p for p in pick(load_dir('presets'), names) if p.get('track', 'melody') in song['tracks']]:
         t = time.time()
         loop, full = render_sound(pre, song)
         write(os.path.join(OUT, 'sounds', f'{pre["name"]}_loop.wav'), loop)
@@ -133,6 +133,7 @@ def cmd_sounds(song, names):
     # one file with every sound (over the bass) back to back, for A/B in any player or DAW
     loops = [os.path.join(OUT, 'sounds', f'{p["name"]}_with_bass.wav') for p in load_dir('presets') if p.get('track', 'melody') == 'melody']
     loops = [f for f in loops if os.path.exists(f)]
+    if not loops: return
     gap = np.zeros((int(0.8 * SR), 2))
     seq = np.concatenate([np.concatenate([sf.read(f)[0], gap]) for f in loops])
     sf.write(os.path.join(OUT, 'ab_all_sounds.wav'), seq, SR, subtype='PCM_24')
@@ -211,6 +212,8 @@ def cmd_arrange(song, names):
     presets = {p['name']: p for p in load_dir('presets')}
     for a in pick(load_dir('arrangements'), names):
         sg = load_midi(os.path.join(HERE, a['midi'])) if 'midi' in a else song   # an arrangement may bring its own MIDI
+        need = {lay.get('track', presets[lay['preset']].get('track', 'melody')) for lay in a['layers'] if 'notes' not in lay} - sg['tracks'].keys()
+        if need: print(f'  arrangement {a["name"]:<22} skipped: the MIDI has no {sorted(need)} track'); continue     # e.g. transcribe.py output has no bass_root
         t = time.time()
         total = int((a['bars'] * sg['bar_s'] + a.get('tail', 8) + 2) * SR)
         mix = np.zeros((2, total)); stems = []
@@ -270,6 +273,7 @@ A.forEach(a=>a.volume={10 ** (-CONTEXT_BASS_DB / 20):.3f});bass.muted=!bon.check
 go.onclick=()=>{{on=!on;if(on){{const t=A[cur].currentTime;S.forEach(a=>{{a.currentTime=t;a.play()}})}}else S.forEach(a=>a.pause())}};
 document.onkeydown=e=>{{const i=+e.key-1;if(i>=0&&i<A.length)B[i].onclick()}};
 setInterval(()=>{{if(on){{const t=A[cur].currentTime;S.forEach(a=>{{if(Math.abs(a.currentTime-t)>0.03)a.currentTime=t}})}}}},2000);</script>"""
+    os.makedirs(OUT, exist_ok=True)          # a command that rendered nothing (arrangements skipped for a missing track) has no folder yet
     with open(os.path.join(OUT, 'index.html'), 'w', encoding='utf-8') as f:
         f.write(html)
 

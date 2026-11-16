@@ -27,12 +27,15 @@ music sounds glass reese       only presets whose name contains "glass" or "rees
 music arrange fracture         only that arrangement
 music check                    every sound plays the MIDI's notes on time and in tune
 music --midi song.mid          any MIDI with a track named "melody" (optional: "bass", "bass_root")
-python transcribe.py song.mp3  audio to MIDI (needs: pip install demucs torch torchaudio)
+python transcribe.py song.mp3  audio to MIDI with Basic Pitch (see below); --loop for a repeating hook
 python qa.py                   loudness, true peak, loop seams, DC, stereo, loudness per bar
 ```
 
-`transcribe.py` splits the song with Demucs, fits the tempo grid, and writes the melody, bass and the song's tuning
-to MIDI. It is made for a clear, repeating melody over a bass line, not for dense or free-time music.
+`transcribe.py` turns a song into `midi/song.mid`: [Basic Pitch](https://github.com/spotify/basic-pitch) (polyphonic, any
+rhythm) on the melody and bass stems, with tempo and tuning written so `music --midi midi/song.mid` renders it in tune.
+`--no-split` uses the full mix, `--quantize` snaps to a 16th grid, `--bpm` fixes a wrong tempo guess. Install:
+`uv pip install --no-deps -r requirements-transcribe.txt` (plus `demucs torch torchaudio` to split). `--loop` is the
+older transcriber for a clear, repeating melody over a bass line (Demucs, tempo grid fit, CQT): cleaner on that, useless elsewhere.
 
 ## Sounds
 

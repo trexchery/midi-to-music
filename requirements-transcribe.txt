@@ -1,0 +1,14 @@
+# Optional, for transcribe.py. Install with:  uv pip install --no-deps -r requirements-transcribe.txt
+# (--no-deps because basic-pitch pins TensorFlow, which has no Python 3.12 wheel; its model also runs on onnxruntime, listed here.)
+basic-pitch       # Apache-2.0 (Spotify); the model ships in the wheel
+onnxruntime
+pretty_midi
+resampy
+mir_eval
+scikit-learn
+typing_extensions
+six
+importlib_resources
+flatbuffers
+protobuf
+# Splitting into melody + bass (otherwise the full mix is transcribed): pip install demucs torch torchaudio  (CPU wheels are enough)
