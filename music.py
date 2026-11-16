@@ -18,6 +18,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, 'renders')
 LAYER_LUFS = -20           # arrangement layer reference: gain keyframes are dB relative to this
 CONTEXT_BASS, CONTEXT_BASS_DB = '16_808_bass', 4    # bass under every A/B sound, dB over the sound (a loud bass sets the key the melody is heard in)
+SKIPPED = set()                                     # presets already reported as skipped
 CENTS = {}                                          # tuning in use, for the player caption
 PRE_LOOPS = 2              # loops rendered before the kept one, so tails wrap and the loop is seamless
 
@@ -55,6 +56,9 @@ def load_dir(sub):
         with open(f, encoding='utf-8') as fh:
             d = json.load(fh)
         d['name'] = os.path.splitext(os.path.basename(f))[0]
+        if sub == 'presets' and not engine.usable(d):      # optional Surge XT missing: skip, say so once
+            if d['name'] not in SKIPPED: print(f'note: skipping {d["name"]} (Surge XT or its patch not found, see README)'); SKIPPED.add(d['name'])
+            continue
         items.append(d)
     return items
 
@@ -62,7 +66,7 @@ def load_dir(sub):
 def pick(items, names):
     if not names: return items
     got = [i for i in items if any(n in i['name'] for n in names)]
-    if not got: sys.exit(f'no match for {names}; have: {[i["name"] for i in items]}')
+    if not got and not any(n in k for n in names for k in SKIPPED): sys.exit(f'no match for {names}; have: {[i["name"] for i in items]}')
     return got
 
 

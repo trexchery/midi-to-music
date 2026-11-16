@@ -1,0 +1,18 @@
+{
+  "description": "Surge XT factory 'Pads/Legacy': a wide analog-style pad (needs the optional free Surge XT, see README)",
+  "engine": "surge",
+  "voice": {
+    "patch": "Pads/Legacy"
+  },
+  "octave": 1,
+  "tail": 8.0,
+  "fx": [
+    {
+      "type": "Reverb",
+      "room_size": 0.85,
+      "damping": 0.5,
+      "wet_level": 0.3,
+      "dry_level": 0.8
+    }
+  ]
+}

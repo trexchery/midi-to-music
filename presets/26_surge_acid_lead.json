@@ -1,0 +1,16 @@
+{
+  "description": "Surge XT factory 'Leads/Sine-Saw Acidish': a sine-and-saw acid lead (needs the optional free Surge XT, see README)",
+  "engine": "surge",
+  "voice": {
+    "patch": "Leads/Sine-Saw Acidish"
+  },
+  "fx": [
+    {
+      "type": "Reverb",
+      "room_size": 0.45,
+      "damping": 0.6,
+      "wet_level": 0.12,
+      "dry_level": 0.9
+    }
+  ]
+}

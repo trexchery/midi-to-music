@@ -1,0 +1,15 @@
+{
+  "description": "Surge XT factory 'Basses/Bass 3': a round analog bass for the bass track (needs the optional free Surge XT, see README)",
+  "engine": "surge",
+  "track": "bass",
+  "octave": 1,
+  "voice": {
+    "patch": "Basses/Bass 3"
+  },
+  "fx": [
+    {
+      "type": "HighpassFilter",
+      "cutoff_frequency_hz": 25
+    }
+  ]
+}
