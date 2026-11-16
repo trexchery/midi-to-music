@@ -11,6 +11,12 @@ timing and loudness. Built so scripts and AI agents can make music without a DAW
 
 Listen: [`demo/`](demo).
 
+## With Claude Code
+
+Clone this repo, open it in [Claude Code](https://claude.com/claude-code) and ask, for example: *"remake song.mp3 with
+three dark synth sounds, then build a 30-second track from my favourite."* The `remake-song` skill
+(`.claude/skills/`) handles setup, note extraction, the A/B comparison, the track and the checks.
+
 ## Quick start
 
 ```sh

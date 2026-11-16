@@ -4,6 +4,7 @@
     music sounds [name ...]       # A/B sounds only (names: preset file stems or parts of them)
     music arrange [name ...]      # arrangements only
     music check                   # verify each sound keeps the MIDI's timing and pitch
+    music list                    # every preset: name, track it plays, description
     music --midi other.mid ...    # drive everything from another MIDI file
 
 Swap an instrument: edit presets/*.json (or copy one to make a new sound), or change a layer's "preset" in
@@ -216,6 +217,7 @@ def cmd_arrange(song, names):
     presets = {p['name']: p for p in load_dir('presets')}
     for a in pick(load_dir('arrangements'), names):
         sg = load_midi(os.path.join(HERE, a['midi'])) if 'midi' in a else song   # an arrangement may bring its own MIDI
+        if 'midi' in a: print(f'  {a["name"]}: {a["midi"]}, {sg["bpm"]:.2f} BPM, tracks {list(sg["tracks"])}')
         need = {lay.get('track', presets[lay['preset']].get('track', 'melody')) for lay in a['layers'] if 'notes' not in lay} - sg['tracks'].keys()
         if need: print(f'  arrangement {a["name"]:<22} skipped: the MIDI has no {sorted(need)} track'); continue     # e.g. transcribe.py output has no bass_root
         t = time.time()
@@ -313,7 +315,7 @@ def cmd_check(song, names):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument('cmd', nargs='?', default='all', choices=['all', 'sounds', 'arrange', 'check', 'player'])
+    ap.add_argument('cmd', nargs='?', default='all', choices=['all', 'sounds', 'arrange', 'check', 'player', 'list'])
     ap.add_argument('names', nargs='*')
     ap.add_argument('--midi', default=os.path.join(HERE, 'midi', 'melody.mid'))
     ap.add_argument('--tune', type=float, help='tuning in cents from A440 (default: the tuning_cents in the MIDI, else 0)')
@@ -326,6 +328,9 @@ def main():
     CENTS.update(song['cents'])
     engine.CTX['eighth'] = 30 / song['bpm']
     print(f'{os.path.basename(a.midi)}: tuning melody {CENTS["melody"]:+.1f} c / bass {CENTS["bass"]:+.1f} c, {song["bpm"]:.2f} BPM, {song["loop_bars"]}-bar loop ({song["loop_s"]:.3f}s), tracks {list(song["tracks"])}')
+    if a.cmd == 'list':
+        for p in pick(load_dir('presets'), a.names): print(f'{p["name"]:<26} {p.get("track", "melody"):<9} {p.get("description", "")}')
+        return
     if a.cmd == 'check': sys.exit(cmd_check(song, a.names))
     if a.cmd in ('all', 'sounds'): cmd_sounds(song, a.names)
     if a.cmd in ('all', 'arrange'): cmd_arrange(song, a.names)

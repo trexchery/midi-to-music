@@ -160,7 +160,7 @@ def basic(a):
     """Default mode: Basic Pitch on the stems (or the full mix), tempo from beat tracking, per-part tuning."""
     sr = 44100
     stem = a.stems or (None if a.no_split else split(a.audio) if importlib.util.find_spec('demucs') else None)
-    if not stem and not a.no_split: print('Demucs not installed (pip install demucs): using the full mix, one "melody" track')
+    if not stem and not a.no_split: print(f'Demucs not installed (pip install demucs): using the full mix, notes under {a.bass_below} -> "bass"')
     if stem:
         wav = {n: librosa.load(os.path.join(stem, n + '.wav'), sr=sr, mono=True)[0] for n in ('vocals', 'other', 'guitar', 'piano', 'bass', 'drums')
                if os.path.exists(os.path.join(stem, n + '.wav'))}
@@ -174,13 +174,18 @@ def basic(a):
     tempo, beats = librosa.beat.beat_track(y=mix, sr=sr, units='time')
     bpm = a.bpm or float(np.atleast_1d(tempo)[0])
     if not bpm > 0: bpm = 120.0; print('no beat found: tempo set to 120 BPM (use --bpm)')      # beat_track returns 0 on sparse or silent audio
+    if not a.bpm and not 60 <= bpm <= 140: print(f'check the tempo: {bpm:.0f} BPM may be double or half the real one (rerun with --bpm)')
     beat_s = 60 / bpm
     origin = float(beats[0]) % beat_s if a.quantize and len(beats) else 0.0      # 16th grid through the first beat
     q = TPB // 4 if a.quantize else 1
     tick = lambda t: max(0, int(round((t - origin) / beat_s * TPB / q)) * q)
     tracks, texts, end = {}, [], 0
-    for name, ys in parts.items():
-        y = sum(ys); notes = basic_pitch_notes(ys, sr, **(dict(minimum_frequency=30, maximum_frequency=500) if name == 'bass' else {}))
+    found = {name: basic_pitch_notes(ys, sr, **(dict(minimum_frequency=30, maximum_frequency=500) if name == 'bass' else {})) for name, ys in parts.items()}
+    if not stem and a.bass_below:                                             # full mix: the low notes become the bass track
+        m = found['melody']; found = {'melody': [n for n in m if n[2] >= a.bass_below], 'bass': [n for n in m if n[2] < a.bass_below]}
+        parts['bass'] = parts['melody']
+    for name, notes in found.items():
+        y = sum(parts[name])
         long = [(s, p) for s, d, p, _ in notes if d >= 0.2]                     # short notes are too brief for an FFT peak
         c = tuning_at(y, sr, long) if long else 0.0
         texts.append(f'tuning_cents{"_bass" if name == "bass" else ""}={c:.1f}')
@@ -200,7 +205,8 @@ def main():
     ap.add_argument('--stems', help='folder with Demucs stems (instead of audio); --loop needs other.wav and bass.wav')
     ap.add_argument('--bpm', type=float, help='tempo (default: detected)')
     ap.add_argument('--loop', action='store_true', help='grid-fitted hook transcriber instead of Basic Pitch')
-    ap.add_argument('--no-split', action='store_true', help='Basic Pitch on the full mix only: one "melody" track')
+    ap.add_argument('--no-split', action='store_true', help='Basic Pitch on the full mix (no Demucs): low notes -> "bass", see --bass-below')
+    ap.add_argument('--bass-below', type=int, default=52, help='full mix: notes under this MIDI note go to the bass track (default 52 = E3; 0 = one track)')
     ap.add_argument('--quantize', action='store_true', help='Basic Pitch: snap note starts and lengths to a 16th grid')
     ap.add_argument('--offset', type=float, help='--loop: time of the first melody note in seconds (default: detected)')
     ap.add_argument('--bars', type=int, default=4, help='--loop: loop length in 4/4 bars (default 4)')

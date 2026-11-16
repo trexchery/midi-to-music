@@ -4,7 +4,7 @@
 seam < 1 means the loop's wrap-around jump is no bigger than an ordinary sample step (no click).
 """
 import glob, os
-import numpy as np, soundfile as sf, pyloudnorm as pyln, scipy.signal as ss
+import numpy as np, soundfile as sf, pyloudnorm as pyln, scipy.signal as ss, mido
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
@@ -20,8 +20,10 @@ for f in sorted(glob.glob(os.path.join(HERE, 'renders/sounds/*_loop.wav'))):
           f'  DC {x.mean():+.4f}  L/R corr {np.corrcoef(x[:, 0], x[:, 1])[0, 1]:4.2f}')
 
 print('arrangements (per-bar LUFS shows the build)')
-bar = 8 * 30 / 83.13
 for f in sorted(glob.glob(os.path.join(HERE, 'renders/arrangements/*.wav'))):
     x, sr = sf.read(f); M = pyln.Meter(sr)
+    mid = f[:-4] + '.mid'                                       # the arrangement's MIDI carries its tempo
+    t = next((m.tempo for tr in mido.MidiFile(mid).tracks for m in tr if m.type == 'set_tempo'), 500000) if os.path.exists(mid) else 500000
+    bar = 4 * t / 1e6
     arc = [M.integrated_loudness(x[int(b * bar * sr):int((b + 1) * bar * sr)]) for b in range(int(len(x) / sr / bar))]
     print(f'  {os.path.basename(f)[:-4]:<18} LUFS {M.integrated_loudness(x):5.1f}  TP {tp(x):5.1f} | ' + ' '.join(f'{v:4.0f}' for v in arc))
