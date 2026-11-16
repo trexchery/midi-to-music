@@ -5,7 +5,7 @@ timing and loudness. Built so scripts and AI agents can make music without a DAW
 
 - **Everything is text.** Melody (MIDI), sounds (JSON presets) and arrangements (JSON) are files you can edit,
   diff and generate.
-- **One melody, any sound.** Swap the instrument; notes, timing and key never change. 25 presets included.
+- **One melody, any sound.** Swap the instrument; notes, timing and key never change. 28 presets included.
 - **It checks itself.** Every render is measured for key, note timing, pitch, loudness and clean loops.
 - **Repeatable.** The same files always render the same audio.
 
@@ -46,6 +46,10 @@ A preset (`presets/*.json`) is a synth `engine` plus an `fx` chain. Copy one, ch
   harmonic sieve, frequency shifter and spectral freeze that re-tune to every note; generated impulse responses.
 - **Optional:** the free [Valhalla Supermassive](https://valhalladsp.com/shop/reverb/valhalla-supermassive/) VST3
   (8 presets; falls back to a built-in reverb, set `SUPERMASSIVE_VST3` if it lives outside the standard folder).
+- **Optional:** the free [Surge XT](https://surge-synthesizer.github.io/) synth (GPL-3.0 VST3): presets with `"engine": "surge"`
+  play the MIDI through a factory patch (`"voice": {"patch": "Pads/Legacy"}`, or a path to your own `.fxp`), tuning and
+  velocity included. Found in the standard VST3 folders, `~/tools/surge-xt` or `SURGE_XT_VST3` (patches: `SURGE_XT_DATA`);
+  without it those presets are skipped. Slow first load (about a minute); some patches vary slightly between renders.
 
 Parameters are documented in the docstrings of `engine.py` and `dsp/*.py`; `python -m dsp.fm_warp` (and
 `dsp.dynamics`, `dsp.noteaware`, `dsp.resample`) self-tests pitch, aliasing and determinism. Note-aware effects follow
