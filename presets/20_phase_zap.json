@@ -1,0 +1,50 @@
+{
+  "description": "Signature / futuristic: Casio-style resonant phase distortion, the resonance diving from 14x to 2x the note in 0.12 s, a wavefolder bite on each attack, dotted-eighth echoes",
+  "engine": "pd",
+  "track": "melody",
+  "octave": 0,
+  "voice": {
+    "window": "trap",
+    "r_start": 14,
+    "r_end": 2,
+    "glide": 0.12,
+    "sub_level": 0.25,
+    "drive": 1.5,
+    "attack": 0.003,
+    "decay": 0.5,
+    "sustain": 0.7,
+    "release": 0.3
+  },
+  "fx": [
+    {
+      "type": "fold",
+      "drive_db": 8,
+      "env_db": 10,
+      "env_decay": 0.08,
+      "mix": 0.5
+    },
+    {
+      "type": "ott",
+      "depth": 0.3
+    },
+    {
+      "type": "pingpong",
+      "time_s": 0.5413,
+      "feedback": 0.4,
+      "mix": 0.25,
+      "tone_hz": 3500
+    },
+    {
+      "type": "HighpassFilter",
+      "cutoff_frequency_hz": 120
+    },
+    {
+      "type": "Reverb",
+      "room_size": 0.55,
+      "damping": 0.6,
+      "wet_level": 0.14,
+      "dry_level": 0.9,
+      "width": 1.0
+    }
+  ]
+}

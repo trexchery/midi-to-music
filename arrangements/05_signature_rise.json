@@ -1,0 +1,354 @@
+{
+  "description": "Signature sounds only: a frozen grain bed and a climbing frequency-shift spiral, resampled steel enters, phase zaps and grit-glass build, one bar of near-silence, then the FM snarl and the talking reese over a full 808.",
+  "bars": 16,
+  "tail": 9,
+  "lufs": -14,
+  "layers": [
+    {
+      "preset": "23_grain_monolith",
+      "from": 0,
+      "to": 16,
+      "gain": [
+        [
+          0,
+          -8
+        ],
+        [
+          8,
+          -9
+        ],
+        [
+          11,
+          -6
+        ],
+        [
+          12,
+          -11
+        ]
+      ],
+      "lpf": [
+        [
+          0,
+          1200
+        ],
+        [
+          8,
+          5000
+        ],
+        [
+          12,
+          9000
+        ]
+      ]
+    },
+    {
+      "preset": "21_harmonic_spiral",
+      "from": 0,
+      "to": 11,
+      "gain": [
+        [
+          0,
+          -12
+        ],
+        [
+          4,
+          -9
+        ],
+        [
+          10.5,
+          -7
+        ],
+        [
+          11,
+          -20
+        ]
+      ],
+      "lpf": [
+        [
+          0,
+          900
+        ],
+        [
+          8,
+          6000
+        ]
+      ]
+    },
+    {
+      "preset": "18_steel_resample",
+      "from": 4,
+      "to": 11,
+      "gain": [
+        [
+          4,
+          -14
+        ],
+        [
+          8,
+          -8
+        ]
+      ],
+      "lpf": [
+        [
+          4,
+          2500
+        ],
+        [
+          8,
+          9000
+        ]
+      ]
+    },
+    {
+      "preset": "18_steel_resample",
+      "from": 12,
+      "to": 16,
+      "gain": [
+        [
+          12,
+          -7
+        ]
+      ],
+      "seed": 1
+    },
+    {
+      "preset": "20_phase_zap",
+      "from": 8,
+      "to": 11,
+      "gain": [
+        [
+          8,
+          -16
+        ],
+        [
+          11,
+          -8
+        ]
+      ]
+    },
+    {
+      "preset": "19_glass_from_grit",
+      "from": 8,
+      "to": 11,
+      "gain": [
+        [
+          8,
+          -14
+        ],
+        [
+          11,
+          -9
+        ]
+      ],
+      "hpf": [
+        [
+          8,
+          600
+        ],
+        [
+          11,
+          200
+        ]
+      ]
+    },
+    {
+      "preset": "19_glass_from_grit",
+      "from": 12,
+      "to": 16,
+      "gain": [
+        [
+          12,
+          -8
+        ]
+      ],
+      "seed": 1
+    },
+    {
+      "preset": "17_fm_snarl",
+      "from": 12,
+      "to": 16,
+      "gain": [
+        [
+          12,
+          -4
+        ],
+        [
+          16,
+          -2
+        ]
+      ]
+    },
+    {
+      "preset": "22_vocal_reese",
+      "from": 12,
+      "to": 16,
+      "gain": [
+        [
+          12,
+          -7
+        ],
+        [
+          16,
+          -5
+        ]
+      ]
+    },
+    {
+      "preset": "16_808_bass",
+      "from": 0,
+      "to": 12,
+      "gain": [
+        [
+          0,
+          -8
+        ],
+        [
+          4,
+          -3
+        ],
+        [
+          8,
+          0
+        ],
+        [
+          10.9,
+          0
+        ],
+        [
+          11,
+          -12
+        ]
+      ]
+    },
+    {
+      "preset": "16_808_bass",
+      "from": 12,
+      "to": 16,
+      "gain": [
+        [
+          12,
+          4
+        ]
+      ],
+      "seed": 1
+    },
+    {
+      "preset": "07_analog_warmth",
+      "from": 16,
+      "to": 17,
+      "notes": [
+        [
+          0,
+          8,
+          65,
+          100
+        ],
+        [
+          0,
+          8,
+          68,
+          104
+        ],
+        [
+          0,
+          8,
+          72,
+          112
+        ]
+      ],
+      "gain": [
+        [
+          16,
+          -4
+        ]
+      ],
+      "tail": 9
+    },
+    {
+      "preset": "23_grain_monolith",
+      "from": 16,
+      "to": 17,
+      "notes": [
+        [
+          0,
+          8,
+          65,
+          100
+        ],
+        [
+          0,
+          8,
+          68,
+          104
+        ],
+        [
+          0,
+          8,
+          72,
+          112
+        ]
+      ],
+      "gain": [
+        [
+          16,
+          -6
+        ]
+      ],
+      "tail": 9
+    },
+    {
+      "preset": "15_sub_drone",
+      "from": 16,
+      "to": 17,
+      "notes": [
+        [
+          0,
+          8,
+          29,
+          112
+        ]
+      ],
+      "gain": [
+        [
+          16,
+          -2
+        ]
+      ],
+      "tail": 9
+    },
+    {
+      "preset": "16_808_bass",
+      "from": 16,
+      "to": 17,
+      "notes": [
+        [
+          0,
+          8,
+          29,
+          112
+        ]
+      ],
+      "gain": [
+        [
+          16,
+          1
+        ]
+      ],
+      "tail": 9
+    }
+  ],
+  "swells": [
+    {
+      "preset": "18_steel_resample",
+      "bar": 12,
+      "beats": 4,
+      "gain": -4
+    },
+    {
+      "preset": "18_steel_resample",
+      "bar": 16,
+      "beats": 4,
+      "gain": -5
+    }
+  ]
+}

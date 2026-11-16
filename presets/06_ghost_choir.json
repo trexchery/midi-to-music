@@ -1,0 +1,58 @@
+{
+  "description": "Haunting: breathy formant voices on an 'oh' vowel, six singers, cathedral air",
+  "engine": "formant",
+  "tail": 8,
+  "voice": {
+    "formants": [
+      [
+        450,
+        80,
+        1.0
+      ],
+      [
+        850,
+        90,
+        0.55
+      ],
+      [
+        2750,
+        150,
+        0.12
+      ],
+      [
+        3500,
+        200,
+        0.06
+      ]
+    ],
+    "voices": 6,
+    "breath": 0.3,
+    "detune_cents": 10,
+    "vib_cents": 12,
+    "attack": 0.12,
+    "release": 1.0
+  },
+  "fx": [
+    {
+      "type": "HighpassFilter",
+      "cutoff_frequency_hz": 180
+    },
+    {
+      "type": "LowpassFilter",
+      "cutoff_frequency_hz": 7000
+    },
+    {
+      "type": "Supermassive",
+      "mode": "Andromeda",
+      "mix": 45,
+      "delay_ms": 200,
+      "feedback": 70,
+      "density": 90,
+      "width": 100,
+      "lowcut": 200,
+      "highcut": 7000,
+      "moddepth": 40,
+      "modrate": 0.2
+    }
+  ]
+}

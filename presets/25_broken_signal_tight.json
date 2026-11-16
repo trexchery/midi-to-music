@@ -1,0 +1,53 @@
+{
+  "description": "Broken Signal, tight: the same lead with short, quiet echoes (for busy syncopated melodies like A, where eighth-note echoes pile up off the beat)",
+  "engine": "subtractive",
+  "voice": {
+    "wave": "square",
+    "pw": 0.35,
+    "voices": 2,
+    "detune_cents": 6,
+    "cutoff": 900,
+    "f_env_oct": 2.5,
+    "f_decay": 0.3,
+    "f_sustain": 0.4,
+    "res": 1.4,
+    "drive": 3.0,
+    "attack": 0.004,
+    "decay": 0.4,
+    "sustain": 0.7,
+    "release": 0.3
+  },
+  "fx": [
+    {
+      "type": "Distortion",
+      "drive_db": 22
+    },
+    {
+      "type": "Bitcrush",
+      "bit_depth": 7
+    },
+    {
+      "type": "LowpassFilter",
+      "cutoff_frequency_hz": 6000
+    },
+    {
+      "type": "HighpassFilter",
+      "cutoff_frequency_hz": 200
+    },
+    {
+      "type": "pingpong",
+      "time_s": 0.3609,
+      "feedback": 0.2,
+      "mix": 0.1,
+      "tone_hz": 2500
+    },
+    {
+      "type": "Reverb",
+      "room_size": 0.5,
+      "damping": 0.5,
+      "wet_level": 0.08,
+      "dry_level": 0.9,
+      "width": 1.0
+    }
+  ]
+}

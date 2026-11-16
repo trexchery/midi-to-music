@@ -1,0 +1,41 @@
+{
+  "description": "Bass (arrangements): warm sub drone holding each bar's root (Bb-C-F-Ab)",
+  "engine": "subtractive",
+  "track": "bass_root",
+  "voice": {
+    "voices": 4,
+    "detune_cents": 6,
+    "cutoff": 140,
+    "f_env_oct": 1.0,
+    "f_decay": 1.0,
+    "f_sustain": 0.5,
+    "res": 0.7,
+    "drive": 2.0,
+    "sub": 0,
+    "attack": 0.3,
+    "decay": 1.0,
+    "sustain": 1.0,
+    "release": 1.5
+  },
+  "fx": [
+    {
+      "type": "LowpassFilter",
+      "cutoff_frequency_hz": 900
+    },
+    {
+      "type": "Compressor",
+      "threshold_db": -16,
+      "ratio": 2.5,
+      "attack_ms": 20,
+      "release_ms": 200
+    },
+    {
+      "type": "Reverb",
+      "room_size": 0.5,
+      "damping": 0.7,
+      "wet_level": 0.08,
+      "dry_level": 0.95,
+      "width": 0.5
+    }
+  ]
+}

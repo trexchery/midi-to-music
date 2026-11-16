@@ -1,0 +1,65 @@
+{
+  "description": "Haunting: bowed metal resonators sing under noise, never quite still",
+  "engine": "modal",
+  "inharmonic": true,
+  "tail": 8,
+  "voice": {
+    "excite": "bow",
+    "modes": [
+      [
+        1,
+        1,
+        0
+      ],
+      [
+        2.0,
+        0.4,
+        0
+      ],
+      [
+        2.76,
+        0.35,
+        0
+      ],
+      [
+        4.0,
+        0.18,
+        0
+      ],
+      [
+        5.4,
+        0.2,
+        0
+      ],
+      [
+        8.93,
+        0.08,
+        0
+      ]
+    ],
+    "bw": 0.7,
+    "attack": 0.12,
+    "bow_release": 0.25,
+    "release": 2.0,
+    "mistune": 0.0006
+  },
+  "fx": [
+    {
+      "type": "HighpassFilter",
+      "cutoff_frequency_hz": 150
+    },
+    {
+      "type": "Supermassive",
+      "mode": "Cassiopeia",
+      "mix": 42,
+      "delay_ms": 300,
+      "feedback": 72,
+      "density": 85,
+      "width": 100,
+      "lowcut": 200,
+      "highcut": 8000,
+      "moddepth": 45,
+      "modrate": 0.25
+    }
+  ]
+}

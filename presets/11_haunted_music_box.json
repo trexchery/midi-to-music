@@ -1,0 +1,57 @@
+{
+  "description": "Haunting: a music-box comb an octave up, warped by worn cassette wow",
+  "engine": "modal",
+  "octave": 1,
+  "voice": {
+    "modes": [
+      [
+        1,
+        1,
+        2.2
+      ],
+      [
+        2.0,
+        0.08,
+        1.0
+      ],
+      [
+        6.27,
+        0.22,
+        0.2
+      ],
+      [
+        17.55,
+        0.06,
+        0.04
+      ]
+    ],
+    "click": 0.12,
+    "release": 2.0
+  },
+  "fx": [
+    {
+      "type": "tape",
+      "wow_ms": 0.7,
+      "wow_hz": 0.45,
+      "flutter_ms": 0.05,
+      "drive": 1.3,
+      "hiss": 0.003
+    },
+    {
+      "type": "LowpassFilter",
+      "cutoff_frequency_hz": 6500
+    },
+    {
+      "type": "HighpassFilter",
+      "cutoff_frequency_hz": 300
+    },
+    {
+      "type": "Reverb",
+      "room_size": 0.8,
+      "damping": 0.6,
+      "wet_level": 0.33,
+      "dry_level": 0.75,
+      "width": 1.0
+    }
+  ]
+}

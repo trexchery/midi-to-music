@@ -1,0 +1,288 @@
+{
+  "description": "Warm turns hostile: analog warmth and a dark harp slowly crossfade into the grinding reese and crushed signal; a reversed reese swell tears into the final pass.",
+  "bars": 16,
+  "tail": 9,
+  "lufs": -14,
+  "layers": [
+    {
+      "preset": "07_analog_warmth",
+      "from": 0,
+      "to": 12,
+      "gain": [
+        [
+          0,
+          -8
+        ],
+        [
+          8,
+          -8
+        ],
+        [
+          12,
+          -28
+        ]
+      ],
+      "lpf": [
+        [
+          0,
+          5000
+        ],
+        [
+          10,
+          1200
+        ]
+      ]
+    },
+    {
+      "preset": "13_dark_harp",
+      "from": 0,
+      "to": 8,
+      "gain": [
+        [
+          0,
+          -11
+        ],
+        [
+          6,
+          -12
+        ],
+        [
+          8,
+          -24
+        ]
+      ]
+    },
+    {
+      "preset": "15_sub_drone",
+      "from": 4,
+      "to": 16,
+      "gain": [
+        [
+          4,
+          -20
+        ],
+        [
+          8,
+          -8
+        ],
+        [
+          12,
+          -2
+        ]
+      ]
+    },
+    {
+      "preset": "08_reese_menace",
+      "from": 6,
+      "to": 16,
+      "gain": [
+        [
+          6,
+          -28
+        ],
+        [
+          12,
+          -3
+        ]
+      ],
+      "lpf": [
+        [
+          6,
+          300
+        ],
+        [
+          12,
+          9000
+        ]
+      ]
+    },
+    {
+      "preset": "05_bowed_steel",
+      "from": 8,
+      "to": 16,
+      "gain": [
+        [
+          8,
+          -18
+        ],
+        [
+          12,
+          -10
+        ]
+      ]
+    },
+    {
+      "preset": "14_broken_signal",
+      "from": 10,
+      "to": 16,
+      "gain": [
+        [
+          10,
+          -26
+        ],
+        [
+          14,
+          -4
+        ]
+      ],
+      "hpf": [
+        [
+          10,
+          1200
+        ],
+        [
+          13,
+          150
+        ]
+      ]
+    },
+    {
+      "preset": "04_struck_monolith",
+      "from": 12,
+      "to": 16,
+      "gain": [
+        [
+          12,
+          -8
+        ]
+      ]
+    },
+    {
+      "preset": "16_808_bass",
+      "from": 0,
+      "to": 16,
+      "gain": [
+        [
+          0,
+          -4
+        ],
+        [
+          8,
+          0
+        ],
+        [
+          12,
+          4
+        ]
+      ]
+    },
+    {
+      "preset": "08_reese_menace",
+      "from": 16,
+      "to": 17,
+      "notes": [
+        [
+          0,
+          8,
+          65,
+          100
+        ],
+        [
+          0,
+          8,
+          68,
+          104
+        ],
+        [
+          0,
+          8,
+          72,
+          112
+        ]
+      ],
+      "gain": [
+        [
+          16,
+          -6
+        ]
+      ],
+      "tail": 9
+    },
+    {
+      "preset": "04_struck_monolith",
+      "from": 16,
+      "to": 17,
+      "notes": [
+        [
+          0,
+          8,
+          65,
+          100
+        ],
+        [
+          0,
+          8,
+          68,
+          104
+        ],
+        [
+          0,
+          8,
+          72,
+          112
+        ]
+      ],
+      "gain": [
+        [
+          16,
+          -3
+        ]
+      ],
+      "tail": 9
+    },
+    {
+      "preset": "15_sub_drone",
+      "from": 16,
+      "to": 17,
+      "notes": [
+        [
+          0,
+          8,
+          29,
+          112
+        ]
+      ],
+      "gain": [
+        [
+          16,
+          -2
+        ]
+      ],
+      "tail": 9
+    },
+    {
+      "preset": "16_808_bass",
+      "from": 16,
+      "to": 17,
+      "notes": [
+        [
+          0,
+          8,
+          29,
+          112
+        ]
+      ],
+      "gain": [
+        [
+          16,
+          1
+        ]
+      ],
+      "tail": 9
+    }
+  ],
+  "swells": [
+    {
+      "preset": "08_reese_menace",
+      "bar": 12,
+      "beats": 4,
+      "gain": -6
+    },
+    {
+      "preset": "04_struck_monolith",
+      "bar": 16,
+      "beats": 4,
+      "gain": -5
+    }
+  ]
+}

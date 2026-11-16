@@ -1,0 +1,331 @@
+{
+  "description": "Cold and futuristic: a filtered sync line and grain dust, steel strikes enter, one bar of near-silence, then crushed signal and reese for the final pass.",
+  "bars": 16,
+  "tail": 9,
+  "lufs": -14,
+  "layers": [
+    {
+      "preset": "10_sync_circuit",
+      "from": 0,
+      "to": 11,
+      "gain": [
+        [
+          0,
+          -11
+        ],
+        [
+          8,
+          -6
+        ],
+        [
+          11,
+          -8
+        ]
+      ],
+      "lpf": [
+        [
+          0,
+          600
+        ],
+        [
+          8,
+          3500
+        ],
+        [
+          11,
+          6000
+        ]
+      ]
+    },
+    {
+      "preset": "10_sync_circuit",
+      "from": 12,
+      "to": 16,
+      "gain": [
+        [
+          12,
+          -3
+        ]
+      ],
+      "lpf": [
+        [
+          12,
+          16000
+        ]
+      ],
+      "seed": 1
+    },
+    {
+      "preset": "09_granular_dust",
+      "from": 0,
+      "to": 16,
+      "gain": [
+        [
+          0,
+          -10
+        ],
+        [
+          10,
+          -7
+        ],
+        [
+          11,
+          -13
+        ],
+        [
+          12,
+          -12
+        ]
+      ]
+    },
+    {
+      "preset": "04_struck_monolith",
+      "from": 4,
+      "to": 11,
+      "gain": [
+        [
+          4,
+          -14
+        ],
+        [
+          8,
+          -9
+        ]
+      ]
+    },
+    {
+      "preset": "04_struck_monolith",
+      "from": 12,
+      "to": 16,
+      "gain": [
+        [
+          12,
+          -4
+        ]
+      ],
+      "seed": 1
+    },
+    {
+      "preset": "15_sub_drone",
+      "from": 4,
+      "to": 11,
+      "gain": [
+        [
+          4,
+          -20
+        ],
+        [
+          8,
+          -9
+        ]
+      ]
+    },
+    {
+      "preset": "15_sub_drone",
+      "from": 12,
+      "to": 16,
+      "gain": [
+        [
+          12,
+          -2
+        ]
+      ],
+      "seed": 1
+    },
+    {
+      "preset": "14_broken_signal",
+      "from": 8,
+      "to": 11,
+      "gain": [
+        [
+          8,
+          -18
+        ],
+        [
+          11,
+          -9
+        ]
+      ]
+    },
+    {
+      "preset": "14_broken_signal",
+      "from": 12,
+      "to": 16,
+      "gain": [
+        [
+          12,
+          -6
+        ],
+        [
+          16,
+          -3
+        ]
+      ],
+      "seed": 1
+    },
+    {
+      "preset": "08_reese_menace",
+      "from": 12,
+      "to": 16,
+      "gain": [
+        [
+          12,
+          -5
+        ]
+      ]
+    },
+    {
+      "preset": "16_808_bass",
+      "from": 0,
+      "to": 12,
+      "gain": [
+        [
+          0,
+          -6
+        ],
+        [
+          8,
+          0
+        ],
+        [
+          10.9,
+          0
+        ],
+        [
+          11,
+          -12
+        ]
+      ]
+    },
+    {
+      "preset": "16_808_bass",
+      "from": 12,
+      "to": 16,
+      "gain": [
+        [
+          12,
+          4
+        ]
+      ],
+      "seed": 1
+    },
+    {
+      "preset": "04_struck_monolith",
+      "from": 16,
+      "to": 17,
+      "notes": [
+        [
+          0,
+          8,
+          65,
+          100
+        ],
+        [
+          0,
+          8,
+          68,
+          104
+        ],
+        [
+          0,
+          8,
+          72,
+          112
+        ]
+      ],
+      "gain": [
+        [
+          16,
+          -2
+        ]
+      ],
+      "tail": 9
+    },
+    {
+      "preset": "09_granular_dust",
+      "from": 16,
+      "to": 17,
+      "notes": [
+        [
+          0,
+          8,
+          65,
+          100
+        ],
+        [
+          0,
+          8,
+          68,
+          104
+        ],
+        [
+          0,
+          8,
+          72,
+          112
+        ]
+      ],
+      "gain": [
+        [
+          16,
+          -6
+        ]
+      ],
+      "tail": 9
+    },
+    {
+      "preset": "15_sub_drone",
+      "from": 16,
+      "to": 17,
+      "notes": [
+        [
+          0,
+          8,
+          29,
+          112
+        ]
+      ],
+      "gain": [
+        [
+          16,
+          -2
+        ]
+      ],
+      "tail": 9
+    },
+    {
+      "preset": "16_808_bass",
+      "from": 16,
+      "to": 17,
+      "notes": [
+        [
+          0,
+          8,
+          29,
+          112
+        ]
+      ],
+      "gain": [
+        [
+          16,
+          1
+        ]
+      ],
+      "tail": 9
+    }
+  ],
+  "swells": [
+    {
+      "preset": "04_struck_monolith",
+      "bar": 12,
+      "beats": 4,
+      "gain": -3
+    },
+    {
+      "preset": "04_struck_monolith",
+      "bar": 16,
+      "beats": 4,
+      "gain": -4
+    }
+  ]
+}

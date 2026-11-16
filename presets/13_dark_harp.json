@@ -1,0 +1,31 @@
+{
+  "description": "Warm / dark: a plucked string (Karplus-Strong), muted bright, deep room",
+  "engine": "pluck",
+  "voice": {
+    "ring": 2.5,
+    "bright": 0.2,
+    "pick_dark": 0.6,
+    "release": 1.2,
+    "spread_cents": 3
+  },
+  "fx": [
+    {
+      "type": "LowpassFilter",
+      "cutoff_frequency_hz": 6500
+    },
+    {
+      "type": "Delay",
+      "delay_seconds": 0.5413,
+      "feedback": 0.25,
+      "mix": 0.12
+    },
+    {
+      "type": "Reverb",
+      "room_size": 0.75,
+      "damping": 0.55,
+      "wet_level": 0.28,
+      "dry_level": 0.8,
+      "width": 1.0
+    }
+  ]
+}

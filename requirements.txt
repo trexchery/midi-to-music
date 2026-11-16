@@ -1,0 +1,10 @@
+# render pipeline (music.py)
+numpy
+scipy
+soundfile
+mido
+pedalboard
+pyloudnorm
+numba
+librosa        # transcribe.py, make_melodies.py, `music check`
+# transcription only (transcribe.py stems): demucs, torch, torchaudio (CPU wheels are enough)

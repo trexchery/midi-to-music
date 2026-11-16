@@ -1,0 +1,53 @@
+{
+  "description": "Signature / distorted: the reese preset resampled into a wavetable, its position jumping at random on the eighths, driven inside the table, then a u-o-a vowel morph per note, multiband distortion and OTT",
+  "engine": "resampled",
+  "track": "melody",
+  "octave": 0,
+  "voice": {
+    "source": "08_reese_menace",
+    "ref_midi": 46,
+    "position": 0.4,
+    "pos_env": 0.3,
+    "chop": 0.5,
+    "unison": 7,
+    "detune_cents": 14,
+    "spread": 0.8,
+    "drive": 4,
+    "cutoff": 3500,
+    "f_env_oct": 2,
+    "res": 1.0,
+    "attack": 0.005,
+    "decay": 0.6,
+    "sustain": 0.8,
+    "release": 0.3
+  },
+  "fx": [
+    {
+      "type": "formant",
+      "vowels": [
+        "u",
+        "o",
+        "a"
+      ],
+      "morph": "note",
+      "q": 7,
+      "drive": 3,
+      "mix": 0.8
+    },
+    {
+      "type": "mbdist"
+    },
+    {
+      "type": "ott",
+      "depth": 0.4
+    },
+    {
+      "type": "HighpassFilter",
+      "cutoff_frequency_hz": 100
+    },
+    {
+      "type": "LowpassFilter",
+      "cutoff_frequency_hz": 9000
+    }
+  ]
+}

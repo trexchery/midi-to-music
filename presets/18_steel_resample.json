@@ -1,0 +1,46 @@
+{
+  "description": "Signature / metallic: the bowed-steel preset rendered, cut into a 128-frame wavetable and replayed as a synth: brightness opens per note, jumps on the eighths, then a comb rings the octave and a metal plate IR",
+  "engine": "resampled",
+  "track": "melody",
+  "octave": 0,
+  "voice": {
+    "source": "05_bowed_steel",
+    "ref_midi": 58,
+    "frames": 128,
+    "order": "bright",
+    "position": 0.3,
+    "pos_env": 0.5,
+    "pos_decay": 0.4,
+    "pos_lfo": 0.15,
+    "lfo_eighths": 4,
+    "chop": 0.25,
+    "unison": 5,
+    "detune_cents": 10,
+    "spread": 0.8,
+    "drive": 3,
+    "cutoff": 5000,
+    "attack": 0.006,
+    "decay": 0.6,
+    "sustain": 0.75,
+    "release": 0.6
+  },
+  "fx": [
+    {
+      "type": "comb",
+      "k": 2,
+      "feedback": 0.85,
+      "damping": 0.4,
+      "mix": 0.35
+    },
+    {
+      "type": "convolve",
+      "kind": "metal",
+      "decay_s": 3,
+      "mix": 0.3
+    },
+    {
+      "type": "HighpassFilter",
+      "cutoff_frequency_hz": 140
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+#!/bin/sh
+# music [all|sounds|arrange|check|player] [names] [--midi file.mid]  (see README)
+exec "$(dirname "$0")/.venv/bin/python" "$(dirname "$0")/music.py" "$@"

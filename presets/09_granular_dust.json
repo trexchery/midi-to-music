@@ -1,0 +1,46 @@
+{
+  "description": "Granular: a cloud of 30-160 ms grains with octave sparks, scattered across the stereo field",
+  "engine": "granular",
+  "tail": 7,
+  "voice": {
+    "density": 120,
+    "grain_ms": [
+      30,
+      160
+    ],
+    "ratios": [
+      1,
+      1,
+      1,
+      1,
+      2,
+      2
+    ],
+    "jitter_cents": 8,
+    "attack": 0.08,
+    "release": 2.2
+  },
+  "fx": [
+    {
+      "type": "HighpassFilter",
+      "cutoff_frequency_hz": 160
+    },
+    {
+      "type": "Supermassive",
+      "mode": "Lyra",
+      "mix": 40,
+      "delay_ms": 180,
+      "feedback": 50,
+      "density": 70,
+      "width": 100,
+      "lowcut": 200,
+      "highcut": 9000,
+      "moddepth": 50,
+      "modrate": 0.4
+    },
+    {
+      "type": "width",
+      "amount": 1.3
+    }
+  ]
+}

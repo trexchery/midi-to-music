@@ -1,0 +1,81 @@
+{
+  "description": "Signature / growl: a 3-operator FM stack with self-feedback, its index hit on every note and swept by a saw LFO on the eighth, then a vowel morph (o-a-e) per eighth, multiband grind and OTT. A talking metal snarl",
+  "engine": "fmstack",
+  "track": "melody",
+  "octave": 0,
+  "voice": {
+    "ops": [
+      {
+        "ratio": 1,
+        "index": [
+          1.0,
+          4.5,
+          0.22
+        ],
+        "feedback": 0.9
+      },
+      {
+        "ratio": 2,
+        "index": [
+          1.4,
+          3.6,
+          0.3
+        ]
+      },
+      {
+        "ratio": 1
+      }
+    ],
+    "algo": "serial",
+    "lfo_div": 1,
+    "lfo_shape": "saw",
+    "lfo_depth": 0.45,
+    "unison": 3,
+    "detune": 10,
+    "spread": 0.7,
+    "drive": 2.0,
+    "cutoff": 7000,
+    "attack": 0.004,
+    "decay": 0.5,
+    "sustain": 0.7,
+    "release": 0.25
+  },
+  "fx": [
+    {
+      "type": "formant",
+      "vowels": [
+        "o",
+        "a",
+        "e",
+        "a",
+        "o"
+      ],
+      "morph": "eighth",
+      "q": 6,
+      "drive": 2.0,
+      "mix": 0.7
+    },
+    {
+      "type": "mbdist",
+      "mid_drive_db": 10,
+      "high_drive_db": 6,
+      "mix": 0.5
+    },
+    {
+      "type": "ott",
+      "depth": 0.35
+    },
+    {
+      "type": "HighpassFilter",
+      "cutoff_frequency_hz": 120
+    },
+    {
+      "type": "Reverb",
+      "room_size": 0.55,
+      "damping": 0.6,
+      "wet_level": 0.14,
+      "dry_level": 0.9,
+      "width": 1.0
+    }
+  ]
+}

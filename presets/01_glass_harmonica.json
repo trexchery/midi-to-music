@@ -1,0 +1,67 @@
+{
+  "description": "Glassy: rubbed-glass sine partials, slow bloom, wide Supermassive halo",
+  "engine": "additive",
+  "voice": {
+    "partials": [
+      [
+        1,
+        1,
+        0
+      ],
+      [
+        2.0,
+        0.16,
+        1.2
+      ],
+      [
+        3.0,
+        0.07,
+        0.6
+      ],
+      [
+        4.01,
+        0.04,
+        0.4
+      ],
+      [
+        5.98,
+        0.02,
+        0.25
+      ]
+    ],
+    "attack": 0.06,
+    "decay": 0.8,
+    "sustain": 0.75,
+    "release": 1.6,
+    "vib_cents": 5,
+    "vib_rate": 5.0,
+    "spread_cents": 1.5,
+    "chiff": 0.05
+  },
+  "fx": [
+    {
+      "type": "HighpassFilter",
+      "cutoff_frequency_hz": 140
+    },
+    {
+      "type": "Chorus",
+      "rate_hz": 0.25,
+      "depth": 0.15,
+      "mix": 0.25,
+      "centre_delay_ms": 9
+    },
+    {
+      "type": "Supermassive",
+      "mode": "Gemini",
+      "mix": 38,
+      "delay_ms": 250,
+      "feedback": 62,
+      "density": 60,
+      "width": 70,
+      "lowcut": 200,
+      "highcut": 12000,
+      "moddepth": 40,
+      "modrate": 0.3
+    }
+  ]
+}

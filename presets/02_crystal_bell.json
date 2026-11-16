@@ -1,0 +1,53 @@
+{
+  "description": "Glassy / metallic: inharmonic FM bell, dotted-eighth echoes into a cold hall",
+  "engine": "fm",
+  "voice": {
+    "pairs": [
+      [
+        1,
+        4.0,
+        1.8,
+        0.5,
+        1.0,
+        3.0
+      ],
+      [
+        1,
+        2.0,
+        0.9,
+        0.3,
+        0.35,
+        1.2
+      ],
+      [
+        3.0,
+        7.11,
+        0.8,
+        0.12,
+        0.08,
+        0.5
+      ]
+    ],
+    "release": 2.5,
+    "spread_cents": 2.5
+  },
+  "fx": [
+    {
+      "type": "HighpassFilter",
+      "cutoff_frequency_hz": 180
+    },
+    {
+      "type": "Supermassive",
+      "mode": "Sagittarius",
+      "mix": 32,
+      "delay_ms": 541,
+      "feedback": 55,
+      "density": 40,
+      "width": 100,
+      "lowcut": 300,
+      "highcut": 12000,
+      "moddepth": 30,
+      "modrate": 0.2
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "description": "Futuristic: hard-sync saw tearing from 4.5x to 1.6x per note, ping-pong in time",
+  "engine": "sync",
+  "voice": {
+    "ratio_start": 4.5,
+    "ratio_end": 1.6,
+    "sweep": 0.18,
+    "cutoff": 1500,
+    "res": 1.4,
+    "f_decay": 0.25,
+    "spread_cents": 7,
+    "attack": 0.004,
+    "sustain": 0.65,
+    "release": 0.4
+  },
+  "fx": [
+    {
+      "type": "pingpong",
+      "time_s": 0.5413,
+      "feedback": 0.45,
+      "mix": 0.3,
+      "tone_hz": 3000
+    },
+    {
+      "type": "Phaser",
+      "rate_hz": 0.15,
+      "depth": 0.5,
+      "mix": 0.3,
+      "feedback": 0.3
+    },
+    {
+      "type": "Reverb",
+      "room_size": 0.7,
+      "damping": 0.5,
+      "wet_level": 0.2,
+      "dry_level": 0.85,
+      "width": 1.0
+    }
+  ]
+}

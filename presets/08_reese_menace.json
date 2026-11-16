@@ -1,0 +1,49 @@
+{
+  "description": "Distorted: a reese, detuned saws grinding through overdrive, with a sub an octave under the melody",
+  "engine": "subtractive",
+  "octave": 0,
+  "voice": {
+    "voices": 4,
+    "detune_cents": 22,
+    "cutoff": 200,
+    "f_env_oct": 3.0,
+    "f_decay": 0.5,
+    "f_sustain": 0.4,
+    "res": 0.6,
+    "drive": 4.0,
+    "sub": 0.35,
+    "attack": 0.006,
+    "decay": 0.5,
+    "sustain": 0.8,
+    "release": 0.35
+  },
+  "fx": [
+    {
+      "type": "Distortion",
+      "drive_db": 16
+    },
+    {
+      "type": "LowpassFilter",
+      "cutoff_frequency_hz": 3800
+    },
+    {
+      "type": "HighpassFilter",
+      "cutoff_frequency_hz": 45
+    },
+    {
+      "type": "Compressor",
+      "threshold_db": -18,
+      "ratio": 3,
+      "attack_ms": 5,
+      "release_ms": 120
+    },
+    {
+      "type": "Reverb",
+      "room_size": 0.4,
+      "damping": 0.7,
+      "wet_level": 0.12,
+      "dry_level": 0.9,
+      "width": 0.8
+    }
+  ]
+}

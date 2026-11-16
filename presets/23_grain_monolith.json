@@ -1,0 +1,38 @@
+{
+  "description": "Signature / granular: pitch-synchronous grains scanned through the sync-circuit sound, frozen into a held spectrum per note, inside a dark sinking cathedral IR. A bed",
+  "engine": "psola",
+  "track": "melody",
+  "octave": 0,
+  "voice": {
+    "source": "10_sync_circuit",
+    "ref_midi": 58,
+    "grain_periods": 4,
+    "scan_speed": 0.2,
+    "start": 0.2,
+    "spray": 8,
+    "stereo_ms": 37,
+    "attack": 0.05,
+    "decay": 1.0,
+    "sustain": 0.85,
+    "release": 1.2
+  },
+  "fx": [
+    {
+      "type": "freeze",
+      "every": "note",
+      "hold_s": 3,
+      "diffusion": 0,
+      "crossfade": 0.3,
+      "mix": 0.5
+    },
+    {
+      "type": "convolve",
+      "kind": "cathedral",
+      "mix": 0.4
+    },
+    {
+      "type": "HighpassFilter",
+      "cutoff_frequency_hz": 180
+    }
+  ]
+}

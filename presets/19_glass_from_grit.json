@@ -1,0 +1,64 @@
+{
+  "description": "Signature / glassy: a bit-stepped FM wavetable crushed through stacked clippers, then an STFT sieve keeps only the note's harmonics, so the grit becomes ringing glass; a spectral freeze holds each note under the next",
+  "engine": "warp",
+  "track": "melody",
+  "octave": 0,
+  "voice": {
+    "table": "saw",
+    "warps": [
+      {
+        "mode": "fm",
+        "amount": 3,
+        "env": 4,
+        "decay": 0.3,
+        "lfo": 1
+      },
+      {
+        "mode": "quantize",
+        "amount": 12
+      }
+    ],
+    "unison": 5,
+    "detune": 18,
+    "spread": 0.8,
+    "drive": 2,
+    "attack": 0.005,
+    "decay": 0.6,
+    "sustain": 0.7,
+    "release": 0.5
+  },
+  "fx": [
+    {
+      "type": "clipstack",
+      "passes": 3,
+      "drive_db": 12
+    },
+    {
+      "type": "sieve",
+      "width_cents": 6,
+      "tilt": -2,
+      "max_harmonic": 30,
+      "mix": 0.85
+    },
+    {
+      "type": "freeze",
+      "every": "note",
+      "hold_s": 1.5,
+      "diffusion": 0.5,
+      "mix": 0.3
+    },
+    {
+      "type": "Supermassive",
+      "mode": "Cassiopeia",
+      "mix": 30,
+      "delay_ms": 300,
+      "feedback": 60,
+      "density": 85,
+      "width": 100,
+      "lowcut": 250,
+      "highcut": 9000,
+      "moddepth": 40,
+      "modrate": 0.25
+    }
+  ]
+}

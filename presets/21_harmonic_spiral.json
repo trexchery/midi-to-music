@@ -1,0 +1,45 @@
+{
+  "description": "Signature / haunting: a windowed-sync wavetable, then a frequency shifter that moves every partial up by the note itself, fed back on dotted eighths so each echo climbs another harmonic; glass IR",
+  "engine": "warp",
+  "track": "melody",
+  "octave": 0,
+  "voice": {
+    "table": "saw",
+    "warps": [
+      {
+        "mode": "sync",
+        "amount": 2.5,
+        "env": 3,
+        "decay": 0.35
+      }
+    ],
+    "sync_window": 1,
+    "unison": 5,
+    "detune": 12,
+    "spread": 0.8,
+    "cutoff": 7000,
+    "attack": 0.006,
+    "decay": 0.6,
+    "sustain": 0.7,
+    "release": 0.5
+  },
+  "fx": [
+    {
+      "type": "fshift",
+      "mode": "harmonic",
+      "k": 1,
+      "feedback": 0.55,
+      "delay": 1.5,
+      "mix": 0.35
+    },
+    {
+      "type": "convolve",
+      "kind": "glass",
+      "mix": 0.25
+    },
+    {
+      "type": "HighpassFilter",
+      "cutoff_frequency_hz": 150
+    }
+  ]
+}

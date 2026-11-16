@@ -1,0 +1,76 @@
+{
+  "description": "Monumental: a pipe organ with sub-octave rank, celeste beating and breath chiff",
+  "engine": "additive",
+  "tail": 8,
+  "voice": {
+    "partials": [
+      [
+        0.5,
+        0.35,
+        0
+      ],
+      [
+        1,
+        1,
+        0
+      ],
+      [
+        2,
+        0.55,
+        0
+      ],
+      [
+        3,
+        0.22,
+        0
+      ],
+      [
+        4,
+        0.28,
+        0
+      ],
+      [
+        6,
+        0.1,
+        0
+      ],
+      [
+        8,
+        0.08,
+        0
+      ]
+    ],
+    "attack": 0.04,
+    "decay": 1,
+    "sustain": 1.0,
+    "release": 0.35,
+    "vib_cents": 0,
+    "spread_cents": 2.5,
+    "chiff": 0.12
+  },
+  "fx": [
+    {
+      "type": "Chorus",
+      "rate_hz": 0.8,
+      "depth": 0.12,
+      "mix": 0.2
+    },
+    {
+      "type": "HighpassFilter",
+      "cutoff_frequency_hz": 40
+    },
+    {
+      "type": "Supermassive",
+      "mode": "Large Magellanic Cloud",
+      "mix": 40,
+      "delay_ms": 350,
+      "feedback": 70,
+      "density": 90,
+      "width": 100,
+      "lowcut": 60,
+      "highcut": 6500,
+      "moddepth": 25,
+      "modrate": 0.15
+    }
+  ]
+}

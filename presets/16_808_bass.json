@@ -1,0 +1,54 @@
+{
+  "description": "Bass (context under every A/B sound): an 808, a near-sine with a touch of 3rd harmonic, bouncing root/octave on eighths",
+  "engine": "additive",
+  "track": "bass",
+  "voice": {
+    "partials": [
+      [
+        1,
+        1,
+        0
+      ],
+      [
+        3,
+        0.22,
+        0
+      ],
+      [
+        5,
+        0.17,
+        0
+      ],
+      [
+        7,
+        0.11,
+        0
+      ]
+    ],
+    "attack": 0.003,
+    "decay": 0.45,
+    "sustain": 0.55,
+    "release": 0.07,
+    "vib_cents": 0,
+    "spread_cents": 0,
+    "pitch_drop_cents": 0,
+    "pitch_drop_s": 0.025
+  },
+  "fx": [
+    {
+      "type": "LowpassFilter",
+      "cutoff_frequency_hz": 520
+    },
+    {
+      "type": "HighpassFilter",
+      "cutoff_frequency_hz": 30
+    },
+    {
+      "type": "Compressor",
+      "threshold_db": -14,
+      "ratio": 3,
+      "attack_ms": 10,
+      "release_ms": 120
+    }
+  ]
+}

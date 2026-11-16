@@ -1,0 +1,67 @@
+{
+  "description": "Signature / electronic: a phase-distorted, 8-step quantized square through a lowpass gate that plucks on every note, a tuned comb bank (1-2-3x the note) and dotted-eighth ping-pong",
+  "engine": "warp",
+  "track": "melody",
+  "octave": 0,
+  "voice": {
+    "table": "square",
+    "warps": [
+      {
+        "mode": "pd",
+        "amount": 0.6,
+        "env": 0.3,
+        "decay": 0.2
+      },
+      {
+        "mode": "quantize",
+        "amount": 8
+      }
+    ],
+    "unison": 3,
+    "detune": 6,
+    "spread": 0.6,
+    "attack": 0.003,
+    "decay": 0.5,
+    "sustain": 0.75,
+    "release": 0.3
+  },
+  "fx": [
+    {
+      "type": "lpg",
+      "decay_s": 0.22,
+      "min_hz": 150,
+      "max_hz": 9000,
+      "res": 2
+    },
+    {
+      "type": "comb",
+      "mode": "bank",
+      "ratios": [
+        1,
+        2,
+        3
+      ],
+      "feedback": 0.8,
+      "mix": 0.3
+    },
+    {
+      "type": "pingpong",
+      "time_s": 0.5413,
+      "feedback": 0.45,
+      "mix": 0.3,
+      "tone_hz": 4000
+    },
+    {
+      "type": "HighpassFilter",
+      "cutoff_frequency_hz": 120
+    },
+    {
+      "type": "Reverb",
+      "room_size": 0.55,
+      "damping": 0.6,
+      "wet_level": 0.14,
+      "dry_level": 0.9,
+      "width": 1.0
+    }
+  ]
+}

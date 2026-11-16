@@ -1,0 +1,78 @@
+{
+  "description": "Metallic: a struck slab of tuned steel, split modes shimmer, long ring",
+  "engine": "modal",
+  "inharmonic": true,
+  "tail": 8,
+  "voice": {
+    "modes": [
+      [
+        1,
+        1,
+        5
+      ],
+      [
+        1.0025,
+        0.7,
+        4.5
+      ],
+      [
+        2.0,
+        0.35,
+        3
+      ],
+      [
+        2.76,
+        0.4,
+        2.2
+      ],
+      [
+        4.0,
+        0.15,
+        1.5
+      ],
+      [
+        5.4,
+        0.22,
+        1.0
+      ],
+      [
+        8.93,
+        0.1,
+        0.5
+      ],
+      [
+        13.34,
+        0.05,
+        0.25
+      ]
+    ],
+    "click": 0.25,
+    "release": 4.0,
+    "mistune": 0.0008
+  },
+  "fx": [
+    {
+      "type": "HighpassFilter",
+      "cutoff_frequency_hz": 120
+    },
+    {
+      "type": "PeakFilter",
+      "cutoff_frequency_hz": 3200,
+      "gain_db": -4,
+      "q": 0.8
+    },
+    {
+      "type": "Supermassive",
+      "mode": "Great Annihilator",
+      "mix": 28,
+      "delay_ms": 120,
+      "feedback": 70,
+      "density": 80,
+      "width": 100,
+      "lowcut": 150,
+      "highcut": 7000,
+      "moddepth": 30,
+      "modrate": 0.2
+    }
+  ]
+}
