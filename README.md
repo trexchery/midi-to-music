@@ -7,7 +7,7 @@ timing and loudness. Built so scripts and AI agents can make music without a DAW
   diff and generate.
 - **One melody, any sound.** Swap the instrument; notes, timing and key never change. 28 presets included.
 - **It checks itself.** Every render is measured for key, note timing, pitch, loudness and clean loops.
-- **Repeatable.** The same files always render the same audio.
+- **Repeatable.** The same files render the same audio (a few Surge XT patches vary slightly).
 
 Listen: [`demo/`](demo).
 
