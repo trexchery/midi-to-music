@@ -7,4 +7,8 @@ resampy
 mir_eval
 scikit-learn
 typing_extensions
+six
+importlib_resources
+flatbuffers
+protobuf
 # Splitting into melody + bass (otherwise the full mix is transcribed): pip install demucs torch torchaudio  (CPU wheels are enough)

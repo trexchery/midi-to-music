@@ -7,7 +7,7 @@
     python transcribe.py --stems DIR [--loop]        # reuse stems already split (--loop needs other.wav and bass.wav)
     python transcribe.py song.mp3 --loop --bpm 90 --bars 8   # override the detected tempo or the loop length
 
-Default: Spotify's Basic Pitch (pip install -r requirements-transcribe.txt) on the Demucs stems: vocals+other+guitar+piano
+Default: Spotify's Basic Pitch (uv pip install --no-deps -r requirements-transcribe.txt) on the Demucs stems: vocals+other+guitar+piano
 -> track "melody", bass -> track "bass". Tempo from librosa beat tracking (or --bpm), tuning from the FFT peak of each note
 (as below), both written to the MIDI. Notes are as heard: no grid unless --quantize. Quantized onsets sit on the 16th grid
 through the first detected beat (MIDI time starts at that grid, less than one beat before the audio's start).
@@ -136,16 +136,23 @@ def save_midi(out, bpm, end_tick, texts, tracks):
 
 def basic_pitch_notes(ys, sr, **kw):
     """Basic Pitch on each audio in ys -> [(start_s, dur_s, midi, amplitude 0-1)]; same-pitch notes never overlap (music.py pairs on/off by pitch)."""
-    from basic_pitch.inference import predict
+    try: from basic_pitch.inference import predict
+    except ImportError as e: sys.exit(f'{e}: uv pip install --no-deps -r requirements-transcribe.txt (or use --loop)')
     ev = []
     with tempfile.TemporaryDirectory() as d:
         for y in ys:
+            if len(y) < sr // 4: continue                     # Basic Pitch raises on audio shorter than ~0.1 s
             f = os.path.join(d, 'in.wav'); sf.write(f, y, sr)
             ev += predict(f, **kw)[2]
+    return no_overlap([(s, e - s, int(p), float(amp)) for s, e, p, amp, _ in ev])
+
+
+def no_overlap(notes):
+    """[(start, dur, midi, x)] with same-pitch notes cut at the next start (music.py pairs on/off by pitch); zero-length ones dropped."""
     out = []
-    for s, e, p, amp, _ in sorted(ev, key=lambda n: (n[2], n[0])):
+    for s, d, p, x in sorted(notes, key=lambda n: (n[2], n[0])):
         if out and out[-1][2] == p and out[-1][0] + out[-1][1] > s: out[-1] = (out[-1][0], s - out[-1][0], p, out[-1][3])
-        out.append((s, e - s, int(p), float(amp)))
+        out.append((s, d, p, x))
     return sorted(n for n in out if n[1] > 0)
 
 
@@ -157,6 +164,7 @@ def basic(a):
     if stem:
         wav = {n: librosa.load(os.path.join(stem, n + '.wav'), sr=sr, mono=True)[0] for n in ('vocals', 'other', 'guitar', 'piano', 'bass', 'drums')
                if os.path.exists(os.path.join(stem, n + '.wav'))}
+        if not wav: sys.exit(f'no stems (vocals.wav, other.wav, bass.wav, ...) in {stem}')
         rms = {k: np.sqrt((v ** 2).mean()) for k, v in wav.items() if k not in ('bass', 'drums')}
         mel = [wav[k] for k in rms if rms[k] > 0.1 * max(rms.values())]      # stems within 20 dB of the loudest: quieter ones are separation bleed
         parts = {'melody': mel, 'bass': [wav['bass']]}
@@ -165,6 +173,7 @@ def basic(a):
         mix = librosa.load(a.audio, sr=sr, mono=True)[0]; parts = {'melody': [mix]}
     tempo, beats = librosa.beat.beat_track(y=mix, sr=sr, units='time')
     bpm = a.bpm or float(np.atleast_1d(tempo)[0])
+    if not bpm > 0: bpm = 120.0; print('no beat found: tempo set to 120 BPM (use --bpm)')      # beat_track returns 0 on sparse or silent audio
     beat_s = 60 / bpm
     origin = float(beats[0]) % beat_s if a.quantize and len(beats) else 0.0      # 16th grid through the first beat
     q = TPB // 4 if a.quantize else 1
@@ -175,10 +184,11 @@ def basic(a):
         long = [(s, p) for s, d, p, _ in notes if d >= 0.2]                     # short notes are too brief for an FFT peak
         c = tuning_at(y, sr, long) if long else 0.0
         texts.append(f'tuning_cents{"_bass" if name == "bass" else ""}={c:.1f}')
-        tracks[name] = [(tick(s), max(q, tick(s + d) - tick(s)), p, int(np.clip(round(127 * amp), 30, 127))) for s, d, p, amp in notes]
+        tracks[name] = no_overlap([(tick(s), max(q, tick(s + d) - tick(s)), p, int(np.clip(round(127 * amp), 30, 127))) for s, d, p, amp in notes])   # snapping can overlap repeats
         end = max([end] + [s + d for s, d, _, _ in tracks[name]])
         print(f'{name}: {len(notes)} notes, tuning {c:+.1f} cents' + (f', {librosa.midi_to_note(min(n[2] for n in notes), unicode=False)}'
               f'..{librosa.midi_to_note(max(n[2] for n in notes), unicode=False)}' if notes else ''))
+    if not tracks['melody']: sys.exit('no notes found')
     print(f'tempo: {bpm:.2f} BPM{" (--bpm)" if a.bpm else ""}{", quantized to 16ths" if a.quantize else ""}')
     save_midi(a.out, bpm, -(-end // (4 * TPB)) * 4 * TPB, texts, tracks)
 
@@ -197,6 +207,7 @@ def main():
     ap.add_argument('--out', help='MIDI file to write (default: midi/<song>.mid, or midi/melody.mid with --loop)')
     a = ap.parse_args()
     if not (a.audio or a.stems): ap.error('give a song file or --stems')
+    if a.bpm is not None and a.bpm <= 0: ap.error('--bpm must be positive')
     a.out = a.out or os.path.join(HERE, 'midi', 'melody.mid' if a.loop else os.path.splitext(os.path.basename((a.audio or a.stems).rstrip('/\\')))[0] + '.mid')
     if not a.loop: return basic(a)
     if a.audio and not a.stems: a.stems = split(a.audio)
