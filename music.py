@@ -57,7 +57,7 @@ def load_dir(sub):
             d = json.load(fh)
         d['name'] = os.path.splitext(os.path.basename(f))[0]
         if sub == 'presets' and not engine.usable(d):      # optional Surge XT missing: skip, say so once
-            if d['name'] not in SKIPPED: print(f'note: skipping {d["name"]} (Surge XT not installed, see README)'); SKIPPED.add(d['name'])
+            if d['name'] not in SKIPPED: print(f'note: skipping {d["name"]} (Surge XT or its patch not found, see README)'); SKIPPED.add(d['name'])
             continue
         items.append(d)
     return items

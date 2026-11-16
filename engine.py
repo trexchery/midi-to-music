@@ -409,7 +409,7 @@ def _juce_b64(b):
 
 def _surge_load(patch):
     """Load the Surge plugin once per process (~30 s: pedalboard scans its 775 parameters) and put `patch` (.fxp) into it
-    (another ~30 s per patch change, so keep a preset's renders together). pedalboard can only load .vstpreset, so the
+    (about 1 s per later patch change). pedalboard can only load .vstpreset, so the
     patch data (an .fxp's chunk is Surge's own patch format) is written into the plugin's VST3 state, which wraps it in
     JUCE base64 inside an XML."""
     if 'plug' not in _SURGE_STATE: _SURGE_STATE['plug'] = pb.load_plugin(SURGE)
@@ -432,12 +432,13 @@ def _surge_dry(notes, preset, n, cents):
     on as is (preset 'vel_curve' does not apply); `cents` is a pitch bend of +-2 semitones, 14 bit (0.025 cent steps).
     Surge's own randomness (unison/oscillator phase, noise) makes two renders differ slightly: not sample-identical."""
     plug = _surge_load(_surge_patch(preset['voice']['patch']))
+    plug([(bytes([0xB0, 120, 0]), 0)], 0.25, SR)   # all sound off + silent tail: pedalboard's reset leaves held/ringing voices that bleed into this render
     bend = int(np.clip(round(8192 + cents / 200 * 8192), 0, 16383))
     ev = [(0, 0, bytes([0xE0, bend & 127, bend >> 7]))]
     for st, du, m, v in notes:
-        if st < n / SR:
-            m += 12 * preset.get('octave', 0)
-            ev += [(st, 1, bytes([0x90, m, max(1, v)])), (min(st + du, n / SR), 0, bytes([0x80, m, 0]))]
+        m = int(round(m + 12 * preset.get('octave', 0)))
+        if st < n / SR and 0 <= m < 128:           # out-of-range notes (octave shift) are dropped
+            ev += [(st, 1, bytes([0x90, m, int(np.clip(round(v), 1, 127))])), (min(max(st + du, st + 0.005), n / SR), 0, bytes([0x80, m, 0]))]   # >= 5 ms: off sorts before on at equal times
     # off before on at equal times; bend first
     y = plug([(b, t) for t, _, b in sorted(ev, key=lambda e: e[:2])], n / SR, SR).astype(np.float64)
     return np.pad(y, ((0, 0), (0, max(0, n - y.shape[1]))))[:, :n]
